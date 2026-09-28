@@ -48,11 +48,11 @@
 
 | Feature | Experience |
 | :--- | :--- |
-| **알람으로 시작하는 대화** | 시간·반복 요일·언어·AI 프로필을 설정하고, 알림을 받은 뒤 앱에서 대화를 시작합니다. |
+| **알람 기반 대화** | 시간·반복 요일·언어·AI 프로필을 설정하고, 알림을 받은 뒤 앱에서 대화를 시작합니다. |
 | **AI 음성 통화** | 언어별 프로필을 선택해 대화합니다. 발화 감지, 응답 대기, 음성 재생 상태를 화면에 표시합니다. |
-| **대화에서 만드는 단어장** | AI 답변에서 단어를 추출하고 한국어 뜻·유의어·반의어·예문을 생성합니다. 지난 단어장도 조회할 수 있습니다. |
-| **통화 기록과 다시 듣기** | 사용자와 AI의 발화를 텍스트로 확인하고, 순서대로 합친 대화 음성을 다시 재생합니다. |
-| **나만의 AI 목소리** | 참조 음성을 업로드해 커스텀 프로필을 만들고, 해당 음성을 활용한 TTS로 대화합니다. |
+| **자동 단어장** | AI 답변에서 단어를 추출하고 한국어 뜻·유의어·반의어·예문을 생성합니다. 지난 단어장도 조회할 수 있습니다. |
+| **통화 기록** | 사용자와 AI의 발화를 텍스트로 확인하고, 순서대로 합친 대화 음성을 다시 재생합니다. |
+| **커스텀 음성** | 참조 음성을 업로드해 커스텀 프로필을 만들고, 해당 음성을 활용한 TTS로 대화합니다. |
 | **다국어 선택** | 영어·한국어·일본어·중국어를 선택하는 UI와 언어별 AI 프로필을 제공합니다. |
 
 <p align="center">
@@ -70,31 +70,23 @@
 **iOS 앱, 대화·데이터 API, GPU 음성 합성 서버를 분리해 연결했습니다.** 알람은 기기 내부에서 관리하고, 대화 요청은 Django를 거쳐 음성 인식·응답 생성·음성 합성으로 이어집니다.
 
 ```mermaid
-flowchart LR
-    subgraph Mobile["iOS · SwiftUI"]
-        App["Audio I/O & Call UI"]
-        Alarm["SwiftData<br/>Local notifications"]
-        Alarm --> App
-    end
+flowchart TB
+    App["iOS app<br/>SwiftUI · AVFoundation"]
+    Alarm["Local alarm<br/>SwiftData · UserNotifications"]
     API["Django REST API<br/>EC2 c5"]
-    STT["Whisper → GPT-4o"]
-    Voice{"AI profile"}
-    Standard["OpenAI TTS"]
-    Custom["FastAPI · XTTS v2<br/>EC2 g4dn"]
-    Store["Call audio / text<br/>Vocabulary JSON"]
-    App -->|Recorded utterance| API
-    API --> STT --> Voice
-    Voice -->|Default| Standard
-    Voice -->|Custom| Custom
-    Standard -->|Audio| API
-    Custom -->|Audio| API
-    API -->|Playback| App
-    API -->|Call ends| Store
+    AI["OpenAI APIs<br/>Whisper · GPT-4o · TTS"]
+    Custom["Custom voice service<br/>FastAPI · XTTS v2 · EC2 g4dn"]
+    Store["Review data<br/>Call audio · Transcript · Vocabulary"]
+    Alarm --- App
+    App <-->|Audio and data| API
+    API <--> AI
+    API <--> Custom
+    API --> Store
     classDef mobile fill:#eef7ff,stroke:#77a0c0,color:#182737
     classDef service fill:#fff1f7,stroke:#d4a0ba,color:#182737
     classDef data fill:#f6f2ff,stroke:#ac9fc7,color:#182737
     class App,Alarm mobile
-    class API,STT,Voice,Standard,Custom service
+    class API,AI,Custom service
     class Store data
 ```
 

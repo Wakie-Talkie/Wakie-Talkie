@@ -29,20 +29,20 @@
 
 ## Features
 
-<table>
+<table width="100%">
   <tr>
-    <th width="20%">Wake-up alarm</th>
-    <th width="20%">AI conversation</th>
-    <th width="20%">Vocabulary</th>
-    <th width="20%">Call history</th>
-    <th width="20%">Custom voice</th>
+    <th width="20%">Alarm</th>
+    <th width="20%">AI call</th>
+    <th width="20%">Words</th>
+    <th width="20%">History</th>
+    <th width="20%">Custom<br>voice</th>
   </tr>
   <tr>
-    <td><img src="assets/screens/alarm.jpg" width="160" alt="시간과 반복 요일을 지정하는 알람 목록"></td>
-    <td><img src="assets/screens/conversation.jpg" width="160" alt="음성 입력 상태를 표시하는 AI 통화 화면"></td>
-    <td><img src="assets/screens/vocabulary.jpg" width="160" alt="뜻, 유의어, 반의어와 예문을 보여주는 단어장"></td>
-    <td><img src="assets/screens/history.jpg" width="160" alt="통화 텍스트와 음성을 다시 확인하는 기록 화면"></td>
-    <td><img src="assets/screens/custom-voice.jpg" width="160" alt="이름, 언어, 소개와 음성 파일로 AI 프로필을 만드는 화면"></td>
+    <td width="20%" align="center" valign="top"><img src="assets/screens/alarm.jpg" width="160" alt="시간과 반복 요일을 지정하는 알람 목록"></td>
+    <td width="20%" align="center" valign="top"><img src="assets/screens/conversation.jpg" width="160" alt="음성 입력 상태를 표시하는 AI 통화 화면"></td>
+    <td width="20%" align="center" valign="top"><img src="assets/screens/vocabulary.jpg" width="160" alt="뜻, 유의어, 반의어와 예문을 보여주는 단어장"></td>
+    <td width="20%" align="center" valign="top"><img src="assets/screens/history.jpg" width="160" alt="통화 텍스트와 음성을 다시 확인하는 기록 화면"></td>
+    <td width="20%" align="center" valign="top"><img src="assets/screens/custom-voice.jpg" width="160" alt="이름, 언어, 소개와 음성 파일로 AI 프로필을 만드는 화면"></td>
   </tr>
 </table>
 
